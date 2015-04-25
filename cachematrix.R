@@ -52,4 +52,3 @@ mat = matrix(r, nrow=8, ncol=8)
 
 # Execute the test using the above variable
 testinvmatrix(mat)
-
