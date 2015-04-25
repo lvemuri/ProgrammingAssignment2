@@ -53,4 +53,3 @@ mat = matrix(r, nrow=6, ncol=6)
 # Execute the test using the above variable
 testinvmatrix(mat)
 
-
