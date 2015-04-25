@@ -7,8 +7,8 @@
 
 makeCacheMatrix <- function(x = matrix()) {
         ## x is a square invertible matrix
-                inv = NULL
-                set = function(y) {
+        inv = NULL
+        set = function(y) {
                 # `<<-` is used to assign a value to an object in an environment 
                 # different from the current environment. 
                 x <<- y
@@ -16,17 +16,17 @@ makeCacheMatrix <- function(x = matrix()) {
         }
         get = function() x
         setinv = function(inverse) 
-        inv <<- inverse 
+                inv <<- inverse 
         getinv = function() inv
         list(set=set, get=get, setinv=setinv, getinv=getinv)
 }
 
 ## cacheSolve returns inverse of the original matrix (input to makeCacheMatrix())
 cacheSolve <- function(x, ...) {
-                inv = x$getinv()
+        inv = x$getinv()
         # if the inverse has already been calculated
         # get it from the cache and skips the computation.
-                if (!is.null(inv)){
+        if (!is.null(inv)){
                 message("getting cached data")
                 return(inv)
         }
@@ -47,8 +47,8 @@ testinvmatrix = function(mat){
 }
 
 # Create input variable for the makeCacheMatrix using random numbers
-r = rnorm(36)
-mat = matrix(r, nrow=6, ncol=6)
+r = rnorm(64)
+mat = matrix(r, nrow=8, ncol=8)
 
 # Execute the test using the above variable
 testinvmatrix(mat)
