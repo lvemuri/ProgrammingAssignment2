@@ -4,40 +4,39 @@
 ##              3. set the inverse
 ##              4. get the inverse
 ## this list is the input to the function cacheSolve()
-
-makeCacheMatrix <- function(x = matrix()) {
+makeCacheMatrix <- function(x) {       
         ## x is a square invertible matrix
-        inv = NULL
-        set = function(y) {
+        inverse <- NULL
+        set <- function(y) {
                 # `<<-` is used to assign a value to an object in an environment 
-                # different from the current environment. 
+                # different from the current environment.
                 x <<- y
-                inv <<- NULL
+                inverse <<- NULL
         }
-        get = function() x
-        setinv = function(inverse) 
-                inv <<- inverse 
-        getinv = function() inv
-        list(set=set, get=get, setinv=setinv, getinv=getinv)
+        get <- function() x
+        setinverse <- function(solve) inverse <<- solve
+        getinverse <- function() inverse
+        list(set = set, get = get, 
+             setinverse = setinverse,
+             getinverse = getinverse)
 }
 
 ## cacheSolve returns inverse of the original matrix (input to makeCacheMatrix())
 cacheSolve <- function(x, ...) {
-        inv = x$getinv()
+        ## x is the output of makeCacheMatrix()
+        inverse <- x$getinverse()
         # if the inverse has already been calculated
-        # get it from the cache and skips the computation.
-        if (!is.null(inv)){
+                if(!is.null(inverse)) {
+                # get it from the cache and skips the computation. 
                 message("getting cached data")
-                return(inv)
+                return(inverse)
         }
-        
         # otherwise, calculates the inverse 
-        mat.data = x$get()
-        inv = solve(mat.data, ...)
-        
+        data <- x$get()
+        inverse <- solve(data, ...)
         # sets the value of the inverse in the cache via the setinv function.
-        x$setinv(inv)
-        return(inv)
+        x$setinverse(inverse)
+        return(inverse)
 }
 
 #Test makeCacheMatrix and cacheSolve
